@@ -15,6 +15,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors();
+
 builder.Services.AddDbContext<FavContext>(options => 
     options.UseSqlite(builder.Configuration["ConnectionStrings:EmsFavs"])
 );
@@ -29,6 +31,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(p => p.WithOrigins("http://localhost:3002"));
 
 app.UseHttpsRedirection();
 
